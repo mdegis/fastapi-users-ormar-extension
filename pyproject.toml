@@ -5,7 +5,7 @@ description = "Use ormar for your fastapi-users project."
 authors = ["Jegor Kitskerkin <jegor.kitskerkin@gmail.com>"]
 license = "MIT License"
 readme = "README.md"
-packages = [{include = "fastapi_users_ormar_ext"}]
+packages = [{include = "fastapi_users_ormar_extension"}]
 
 [tool.poetry.dependencies]
 python = "^3.9"
