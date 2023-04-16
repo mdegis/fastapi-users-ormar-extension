@@ -1,4 +1,4 @@
-# fastapi-users-ormar-ext
+# fastapi-users-ormar-extension
 Extension to use ormar in fastapi-users
 
 
