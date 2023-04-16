@@ -6,7 +6,7 @@ Extension to use ormar in fastapi-users
 
 To install use:
 ```sh
-pip install fastapi-users-ormar-ext
+pip install fastapi-users-ormar-extension
 ```
 
 # Usage
@@ -18,10 +18,11 @@ from typing import Optional
 
 import ormar
 
-from fastapi_users_ormar_ext import (
+from fastapi_users_ormar_extension import (
     OrmarBaseUserTableUUID,
     OrmarBaseOAuthAccountTableUUID,
 )
+
 
 class BaseMeta(ormar.ModelMeta):
     """Base metadata for models."""
