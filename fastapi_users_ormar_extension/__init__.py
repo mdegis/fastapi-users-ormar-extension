@@ -1,6 +1,6 @@
 """Use ormar as ORM in your fastapi-users."""
-from typing import Any, Dict, Dict, Generic, Optional, Type
 import uuid
+from typing import Any, Dict, Generic, Optional, Type
 
 import ormar
 from fastapi_users.db.base import BaseUserDatabase
@@ -18,9 +18,10 @@ class OrmarBaseUserTable(Generic[ID]):
 
 
 class OrmarBaseUserTableUUID(ormar.Model, OrmarBaseUserTable[UUID_ID]):
-    class Meta:
-        tablename = "users"
-        abstract = True
+    ormar_config = ormar.OrmarConfig(
+        tablename="users",
+        abstract=True,
+    )
 
     id: UUID_ID = ormar.UUID(primary_key=True, default=uuid.uuid4, uuid_format="string")
 
@@ -35,9 +36,10 @@ class OrmarBaseOAuthAccountTable(Generic[ID]):
 
 
 class OrmarBaseOAuthAccountTableUUID(ormar.Model, OrmarBaseOAuthAccountTable[UUID_ID]):
-    class Meta:
-        tablename = "oauth_accounts"
-        abstract = True
+    ormar_config = ormar.OrmarConfig(
+        tablename="oauth_accounts",
+        abstract=True,
+    )
 
     id: UUID_ID = ormar.UUID(primary_key=True, default=uuid.uuid4, uuid_format="string")
 
@@ -46,14 +48,13 @@ class OrmarBaseOAuthAccountTableUUID(ormar.Model, OrmarBaseOAuthAccountTable[UUI
 
 
 class OrmarUserDatabase(Generic[UP, ID], BaseUserDatabase[UP, ID]):
-
     user_table: Type[UP]
     oauth_account_table: Optional[Type[OrmarBaseOAuthAccountTable]]
 
     def __init__(
-        self,
-        user_table: Type[UP],
-        oauth_account_table: Optional[Type[OrmarBaseOAuthAccountTable]] = None,
+            self,
+            user_table: Type[UP],
+            oauth_account_table: Optional[Type[OrmarBaseOAuthAccountTable]] = None,
     ):
         self.user_table = user_table
         self.oauth_account_table = oauth_account_table
@@ -97,7 +98,7 @@ class OrmarUserDatabase(Generic[UP, ID], BaseUserDatabase[UP, ID]):
         return user
 
     async def update_oauth_account(
-        self, user: UP, oauth_account: OAP, update_dict: Dict[str, Any]
+            self, user: UP, oauth_account: OAP, update_dict: Dict[str, Any]
     ) -> UP:
         for key, value in update_dict.items():
             setattr(oauth_account, key, value)

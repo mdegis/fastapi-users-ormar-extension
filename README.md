@@ -44,8 +44,3 @@ class OAuthAccount(OrmarBaseOAuthAccountTableUUID):
 
     user: User = ormar.ForeignKey(User, nullable=False, ondelete="cascade")
 ```
-
-# TODO
-
-[ ] Think of a way to force `user` field overriding in OrmarBaseOAuthAccountTableUUID
-[ ] Add tests
